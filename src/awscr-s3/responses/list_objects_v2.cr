@@ -10,7 +10,12 @@ module Awscr::S3::Response
 
       name = xml.string("//ListBucketResult/Name")
       prefix = xml.string("//ListBucketResult/Prefix")
-      key_count = xml.string("//ListBucketResult/KeyCount")
+      # key_count = xml.string("//ListBucketResult/KeyCount")
+      # Attention: this is a hack for compatibility with exoscale pithos
+      # The value is of KeyCount always less than or equal to the MaxKeys value
+      # see :
+      # https://docs.aws.amazon.com/AmazonS3/latest/API/v2-RESTBucketGET.html
+      key_count = xml.string("//ListBucketResult/MaxKeys")
       max_keys = xml.string("//ListBucketResult/MaxKeys")
       truncated = xml.string("//ListBucketResult/IsTruncated")
       token = xml.string("//ListBucketResult/NextContinuationToken")
