@@ -16,6 +16,11 @@ module Awscr
               CompleteMultipartUpload.new("location", "key", "etag")).should be_false
           end
         end
+
+        it "removes surrounding quotes from etags" do
+          response = CompleteMultipartUpload.new("test", "123", "\"etag\"")
+          response.etag.should eq("etag")
+        end
       end
     end
   end

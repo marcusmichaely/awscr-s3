@@ -21,9 +21,10 @@ module Awscr::S3::Response
     getter location
 
     # The etag of the uploaded object
-    getter etag
+    getter etag : String
 
-    def initialize(@location : String, @key : String, @etag : String)
+    def initialize(@location : String, @key : String, etag : String)
+      @etag = etag.strip('"')
     end
 
     def_equals @key, @location, @etag

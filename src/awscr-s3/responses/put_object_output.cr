@@ -9,9 +9,10 @@ module Awscr::S3::Response
     end
 
     # The etag of the new object
-    getter etag
+    getter etag : String
 
-    def initialize(@etag : String)
+    def initialize(etag : String)
+      @etag = etag.strip('"')
     end
 
     def_equals @etag

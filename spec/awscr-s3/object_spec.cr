@@ -34,5 +34,10 @@ module Awscr::S3
       object.last_modified.should eq(OBJECT_TEST_TIME)
       object.last_modified.utc?.should be_true
     end
+
+    it "removes surrounding quotes from etags" do
+      object = Object.new("test", 123, "\"etag\"", OBJECT_TEST_TIME)
+      object.etag.should eq("etag")
+    end
   end
 end

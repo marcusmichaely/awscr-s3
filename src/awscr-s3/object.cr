@@ -8,12 +8,13 @@ module Awscr::S3
     getter size
 
     # The `Object` etag
-    getter etag
+    getter etag : String
 
     # The time string the `Object` was last modifed
     getter last_modified
 
-    def initialize(@key : String, @size : Int32, @etag : String, @last_modified : Time)
+    def initialize(@key : String, @size : Int32, etag : String, @last_modified : Time)
+      @etag = etag.strip('"')
     end
 
     def_equals @key, @size, @etag, @last_modified
